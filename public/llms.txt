@@ -1,9 +1,14 @@
-# Minesweeper Project
+# Minesweeper Game Application
 
-A web-based Minesweeper game built using React, Vite, TypeScript, and Tailwind CSS. The engine focuses on performance, precise state-tracking adjustments, and layout patterns optimized for various device sizes.
+An accessible, high-performance web implementation of the classic Minesweeper puzzle game built using React, Vite, TypeScript, and Tailwind CSS. It features custom difficulty adjustments and a state-rollback system.
 
-## Core Features
+## Component Architecture
 
-- **First-Click Safety Check:** Ensures the initial revealed block never contains a mine by lazily generating mine positions upon user interaction.
-- **Move History Tracking:** Maintains an array stack of historical board configurations up to 10 moves deep to power instantaneous state rollbacks.
-- **Customization Controls:** Variable difficulty options allowing selection between 5 and 20 global mines per layout session.
+- **Home Component (`/src/pages/Home.tsx`):** Coordinates the main game loop, manages recursive board disclosure routines, and hosts game state updates.
+- **Tile Component (`/src/components/TileComponent.tsx`):** Renders individual target fields handles click mechanics and updates cell flags.
+
+## State Management Architecture
+
+- **Lazy Mine Generation:** Delays mine mapping until the user triggers the first tile click, guaranteeing a bomb-free starting position.
+- **Undo Capability:** Implements an array-based stack tracking the previous 10 board turns for immediate board reversion.
+- **Dynamic CSS Grids:** Leverages responsive CSS variables inside Tailwind configurations to instantly scale grid allocations based on board density settings.
