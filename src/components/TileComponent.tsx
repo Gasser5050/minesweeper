@@ -1,6 +1,6 @@
 import type { Tile } from "../types/Types";
 
-function Tile({
+function Component({
   tile,
   markTile,
   revealTile
@@ -21,4 +21,4 @@ function Tile({
   );
 }
 
-export default Tile;
+export default Component;

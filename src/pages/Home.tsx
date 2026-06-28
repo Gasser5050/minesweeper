@@ -1,3 +1,4 @@
+import TileComponent from "../components/TileComponent";
 import { useState } from "react";
 import { createBoard } from "../utils/createBoard";
 import { minesPositions } from "../utils/minesPositions";
@@ -5,7 +6,7 @@ import { replaceTile } from "../utils/replaceTile";
 import { nearbyTiles } from "../utils/nearbyTiles";
 import { checkWin } from "../utils/checkWin";
 import { checkLose } from "../utils/checkLose";
-import Tile from "../components/Tile";
+import type { Tile } from "../types/Types";
 
 const BOARD_SIZE = 10;
 
@@ -126,7 +127,7 @@ function Home() {
         {board.map(row => {
           return row.map(tile => {
             return (
-              <Tile
+              <TileComponent
                 key={tile.id}
                 tile={tile}
                 markTile={markTile}
