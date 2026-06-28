@@ -11,7 +11,9 @@ function AppLayout() {
         </div>
       )}
 
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
 
       <ScrollRestoration />
     </div>

@@ -1,9 +1,9 @@
-# Router Dashboard
+# Minesweeper Project
 
-An advanced dashboard application built with React Router, Vite, and Axios for tracking tracking logs, managing global user directories, and organizing synchronized personal task itineraries.
+A web-based Minesweeper game built using React, Vite, TypeScript, and Tailwind CSS. The engine focuses on performance, precise state-tracking adjustments, and layout patterns optimized for various device sizes.
 
-## Endpoints
+## Core Features
 
-- [Posts](https://router-dashboard-ochre.vercel.app/posts): View public developer text updates and system comment logs.
-- [Users](https://router-dashboard-ochre.vercel.app/users): Comprehensive global profiles, company descriptions, and address directories.
-- [Todos](https://router-dashboard-ochre.vercel.app/todos): Interactive, query-filtered task checklists synced to persistent data arrays.
+- **First-Click Safety Check:** Ensures the initial revealed block never contains a mine by lazily generating mine positions upon user interaction.
+- **Move History Tracking:** Maintains an array stack of historical board configurations up to 10 moves deep to power instantaneous state rollbacks.
+- **Customization Controls:** Variable difficulty options allowing selection between 5 and 20 global mines per layout session.
