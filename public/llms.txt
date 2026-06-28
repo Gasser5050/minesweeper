@@ -2,13 +2,14 @@
 
 An accessible, high-performance web implementation of the classic Minesweeper puzzle game built using React, Vite, TypeScript, and Tailwind CSS. It features custom difficulty adjustments and a state-rollback system.
 
-## Component Architecture
+## Source Architecture
 
-- **Home Component (`/src/pages/Home.tsx`):** Coordinates the main game loop, manages recursive board disclosure routines, and hosts game state updates.
-- **Tile Component (`/src/components/TileComponent.tsx`):** Renders individual target fields handles click mechanics and updates cell flags.
+- [Main Application Hub Component](./src/pages/Home.tsx): Coordinates the primary game loop, manages recursive board disclosure routines, and tracks historical state modifications.
+- [Tile Rendering Component](./src/components/TileComponent.tsx): Handles individual cell layouts, click mechanisms, context menu flagging, and asset styling.
+- [TypeScript Definitions](./src/types/Types.ts): Contains explicit interfaces for state variables and game structures.
 
-## State Management Architecture
+## Functional Utilities
 
-- **Lazy Mine Generation:** Delays mine mapping until the user triggers the first tile click, guaranteeing a bomb-free starting position.
-- **Undo Capability:** Implements an array-based stack tracking the previous 10 board turns for immediate board reversion.
-- **Dynamic CSS Grids:** Leverages responsive CSS variables inside Tailwind configurations to instantly scale grid allocations based on board density settings.
+- [Board Generators](./src/utils/createBoard.ts): Builds the multi-dimensional grid array and randomizes initial item offsets.
+- [Neighbor Calculation Utilities](./src/utils/nearbyTiles.ts): Computes vector arrays for matching cell groupings surrounding coordinates.
+- [Validation Handlers](./src/utils/checkWin.ts): Automated algorithms running checks to instantly evaluate final win/loss state criteria.
