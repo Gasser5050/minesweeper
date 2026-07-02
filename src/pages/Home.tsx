@@ -12,7 +12,7 @@ const BOARD_SIZE = 10;
 
 function Home() {
   const [safetyCheck, setSafetyCheck] = useState(true);
-  const [mines, setMines] = useState(5);
+  const [mines, setMines] = useState(10);
   const [board, setBoard] = useState(() =>
     createBoard(BOARD_SIZE, minesPositions(BOARD_SIZE, mines))
   );
@@ -24,6 +24,7 @@ function Home() {
 
   const win = checkWin(board);
   const lose = checkLose(board);
+  const gameEnded = win || lose;
 
   function markTile(tile: Tile) {
     if (win || lose) return;
@@ -100,6 +101,7 @@ function Home() {
 
   function undoBoard() {
     if (boardArray.length === 0) return;
+    if (win || lose) return;
 
     const lastBoard = boardArray[boardArray.length - 1];
 
@@ -108,21 +110,26 @@ function Home() {
   }
 
   return (
-    <>
-      <h1 className="m-5 text-2xl md:text-5xl">Minesweeper</h1>
-      {win && <p className="text-subText text-lg md:text-xl mb-2.5">You Win</p>}
+    <div className="flex flex-col items-center select-none pb-5">
+      {win && (
+        <p className="text-subText dark:text-black text-lg md:text-xl mb-2.5">
+          You Win
+        </p>
+      )}
       {lose && (
-        <p className="text-subText text-lg md:text-xl mb-2.5">You lose</p>
+        <p className="text-subText dark:text-black text-lg md:text-xl mb-2.5">
+          You lose
+        </p>
       )}
       {!win && !lose && (
-        <p className="text-subText text-lg md:text-xl mb-2.5">
+        <p className="text-subText dark:text-black text-lg md:text-xl mb-2.5">
           Mines Left: {mines - markedTilesCount}
         </p>
       )}
       <div
         onContextMenu={e => e.preventDefault()}
         style={{ "--size": BOARD_SIZE } as React.CSSProperties}
-        className="bg-board grid grid-cols-board-mobile grid-rows-board-mobile md:grid-cols-board md:grid-rows-board p-2 gap-1"
+        className="bg-board border-2 border-zinc-600 grid grid-cols-board-mobile grid-rows-board-mobile md:grid-cols-board md:grid-rows-board p-2 gap-1 rounded-sm"
       >
         {board.map(row => {
           return row.map(tile => {
@@ -137,12 +144,23 @@ function Home() {
           });
         })}
       </div>
-      <button
-        onClick={undoBoard}
-        className="mt-4 text-md md:text-2xl px-4 py-2 bg-red-500 hover:bg-white text-white hover:text-red-500 ring-1 ring-red-800 rounded-lg duration-200 cursor-pointer"
-      >
-        Undo
-      </button>
+      <div className="flex space-x-3">
+        <button
+          onClick={undoBoard}
+          className={`${gameEnded && "line-through"} mt-4 text-md md:text-2xl px-4 py-2 bg-red-500 dark:bg-zinc-900 hover:bg-white dark:hover:bg-slate-50 text-white dark:hover:text-zinc-950 hover:text-red-500 ring-1 ring-red-200 dark:ring-slate-700 hover:ring-red-600 dark:hover:ring-slate-700 rounded-lg duration-200 cursor-pointer hover:scale-[1.01]`}
+        >
+          Undo
+        </button>
+        <button
+          onClick={() =>
+            setBoard(createBoard(BOARD_SIZE, minesPositions(BOARD_SIZE, mines)))
+          }
+          className="mt-4 text-md md:text-2xl px-4 py-2 bg-red-500 dark:bg-zinc-900 hover:bg-white dark:hover:bg-slate-50 text-white dark:hover:text-zinc-950 hover:text-red-500 ring-1 ring-red-200 dark:ring-slate-700 hover:ring-red-600 dark:hover:ring-slate-700 rounded-lg duration-200 cursor-pointer hover:scale-[1.01]"
+        >
+          Reset
+        </button>
+      </div>
+
       <div className="flex justify-center items-center text-md mt-2 space-x-3">
         <label htmlFor="minesCount" className="text-md md:text-xl">
           Choose number of mines
@@ -160,7 +178,7 @@ function Home() {
             );
             setBoardArray([]);
           }}
-          className="text-center bg-white text-black text-sm w-10 h-5 rounded-lg"
+          className="text-center bg-white dark:bg-zinc-900 text-black dark:text-white text-sm w-10 h-5 rounded-lg cursor-pointer"
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -168,7 +186,7 @@ function Home() {
           <option value={20}>20</option>
         </select>
       </div>
-    </>
+    </div>
   );
 }
 
