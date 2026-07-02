@@ -11,6 +11,7 @@ function ToggleView({
     <>
       <button
         type="button"
+        aria-label="Toggle Theme"
         onClick={() => {
           toggleTheme(s => !s);
           localStorage.setItem("THEME", JSON.stringify(!theme));
