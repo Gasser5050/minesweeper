@@ -152,9 +152,12 @@ function Home() {
           Undo
         </button>
         <button
-          onClick={() =>
-            setBoard(createBoard(BOARD_SIZE, minesPositions(BOARD_SIZE, mines)))
-          }
+          onClick={() => {
+            setBoard(
+              createBoard(BOARD_SIZE, minesPositions(BOARD_SIZE, mines))
+            );
+            setSafetyCheck(true);
+          }}
           className="mt-4 text-md md:text-2xl px-4 py-2 bg-red-500 dark:bg-zinc-900 hover:bg-white dark:hover:bg-slate-50 text-white dark:hover:text-zinc-950 hover:text-red-500 ring-1 ring-red-200 dark:ring-slate-700 hover:ring-red-600 dark:hover:ring-slate-700 rounded-lg duration-200 cursor-pointer hover:scale-[1.01]"
         >
           Reset
